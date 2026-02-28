@@ -1,0 +1,63 @@
+:root {
+  --color-bg-main: #121216; /* 틱톡킬라 어두운 배경 */
+  --color-bg-card: #1c1c21; /* 패널 배경 */
+  --color-bg-input: #15151a; /* 검색창, 입력창 배경 */
+  --color-brand-primary: #00f26d; /* 네온 그린 포인트 컬러 */
+  --color-brand-hover: #00d25c;
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #a0a0a5;
+  --color-border: #2e2e36;
+  --color-border-active: #00f26d;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+input, button {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}

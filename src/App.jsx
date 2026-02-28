@@ -33,7 +33,8 @@ function App() {
           views_filter: filters.views,
           period_filter: filters.period
         });
-        const response = await fetch(`http://127.0.0.1:8000/api/search?${params.toString()}`);
+        // Use Render backend URL instead of localhost
+        const response = await fetch(`https://tiktok-killa-backend.onrender.com/api/search?${params.toString()}`);
         if (response.ok) {
           const data = await response.json();
           setVideos(data);

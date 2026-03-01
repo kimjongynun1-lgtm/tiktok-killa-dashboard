@@ -36,7 +36,15 @@ export default function VideoResults({ keyword, filters, videos }) {
             <div className="video-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))' }}>
                 {videos.map(video => (
                     <div key={video.id} className="video-card" style={{ height: '580px', backgroundColor: 'var(--color-bg-card)', borderRadius: '12px', overflow: 'hidden', position: 'relative' }}>
-                        <div className="video-thumbnail-container" style={{ height: '100%', padding: 0 }}>
+                        <div className="video-thumbnail-container" style={{ height: '100%', padding: 0, position: 'relative' }}>
+                            <a
+                                href={filters.platform === 'douyin' ? 'https://www.douyin.com/jingxuan' : `https://www.tiktok.com/${video.author}/video/${video.id}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ display: 'block', width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: 5 }}
+                            >
+                                {/* Invisible clickable overlay */}
+                            </a>
                             {video.video_url ? (
                                 <video
                                     src={video.video_url}
@@ -44,15 +52,22 @@ export default function VideoResults({ keyword, filters, videos }) {
                                     autoPlay
                                     loop
                                     muted
-                                    controls
                                 />
                             ) : (
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'gray' }}>
                                     동영상을 불러올 수 없습니다.
                                 </div>
                             )}
-                            <div className="video-views-badge" style={{ top: '10px', right: '10px', bottom: 'auto', left: 'auto', zIndex: 10 }}>
-                                <span className="view-icon">▶</span> {video.views}
+
+                            <div className="video-badges" style={{ position: 'absolute', top: '10px', right: '10px', display: 'flex', gap: '8px', zIndex: 10 }}>
+                                <div className="video-views-badge" style={{ position: 'relative', top: 0, right: 0 }}>
+                                    <span className="view-icon">▶</span> {video.views}
+                                </div>
+                                {video.age_days && (
+                                    <div className="video-views-badge" style={{ position: 'relative', top: 0, right: 0, backgroundColor: 'rgba(235, 64, 52, 0.8)' }}>
+                                        {video.age_days}일 전
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="video-info" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(transparent, rgba(0,0,0,0.8))', padding: '16px', color: 'white' }}>

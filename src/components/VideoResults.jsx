@@ -25,10 +25,7 @@ export default function VideoResults({ keyword, filters, videos }) {
                     <span>언어: {filters.language.toUpperCase()}</span>
                     <span>조회수 필터: {
                         filters.views === 'all' ? '전체' :
-                            filters.views === '100k+' ? '10만 이상' :
-                                filters.views === '300k-500k' ? '30만~50만' :
-                                    filters.views === '500k-1m' ? '50만~100만' :
-                                        filters.views === '1m+' ? '100만+' : filters.views
+                            filters.views === '100k+' ? '10만 이상' : filters.views
                     }</span>
                 </div>
             </div>

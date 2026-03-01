@@ -4,10 +4,7 @@ import './components.css';
 export default function Filters({ filters, setFilters }) {
     const viewsOptions = [
         { id: 'all', label: '전체' },
-        { id: '100k+', label: '10만 이상' },
-        { id: '300k-500k', label: '30만~50만' },
-        { id: '500k-1m', label: '50만~100만' },
-        { id: '1m+', label: '100만+' }
+        { id: '100k+', label: '10만 이상' }
     ];
 
     const periodOptions = [
@@ -57,19 +54,8 @@ export default function Filters({ filters, setFilters }) {
         <div className="filter-section">
             <div className="filter-box">
                 <div className="section-title">조회수</div>
-                <div className="tag-grid top-row">
-                    {viewsOptions.slice(0, 3).map(opt => (
-                        <div
-                            key={opt.id}
-                            className={`filter-tag ${filters.views === opt.id ? 'active' : ''}`}
-                            onClick={() => handleChange('views', opt.id)}
-                        >
-                            {opt.label}
-                        </div>
-                    ))}
-                </div>
-                <div className="tag-grid bottom-row">
-                    {viewsOptions.slice(3).map(opt => (
+                <div className="tag-grid">
+                    {viewsOptions.map(opt => (
                         <div
                             key={opt.id}
                             className={`filter-tag ${filters.views === opt.id ? 'active' : ''}`}

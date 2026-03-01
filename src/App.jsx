@@ -19,17 +19,48 @@ function App() {
 
   const [isSearching, setIsSearching] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [translatedKeyword, setTranslatedKeyword] = useState('');
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const translateKeyword = async () => {
+      if (!searchKeyword) return;
+
+      if (language === 'kr') {
+        setTranslatedKeyword(searchKeyword);
+        return;
+      }
+
+      try {
+        const targetLang = language === 'cn' ? 'zh-CN' : 'en';
+        const params = new URLSearchParams({ q: searchKeyword, target: targetLang });
+        // Use Render backend URL instead of localhost
+        const response = await fetch(`https://tiktok-killa-backend.onrender.com/api/translate?${params.toString()}`);
+        if (response.ok) {
+          const data = await response.json();
+          setTranslatedKeyword(data.translated);
+        } else {
+          setTranslatedKeyword(searchKeyword);
+        }
+      } catch (err) {
+        console.error("Translation error:", err);
+        setTranslatedKeyword(searchKeyword);
+      }
+    };
+
+    translateKeyword();
+  }, [searchKeyword, language]);
+
+  useEffect(() => {
     const fetchVideos = async () => {
-      if (!isSearching || !searchKeyword) return;
+      if (!isSearching || !translatedKeyword) return;
 
       setIsLoading(true);
       try {
         const params = new URLSearchParams({
-          q: searchKeyword,
+          q: translatedKeyword,
+          platform: platform,
           views_filter: filters.views,
           period_filter: filters.period
         });
@@ -51,13 +82,11 @@ function App() {
     };
 
     fetchVideos();
-  }, [searchKeyword, filters.views, filters.period, isSearching]);
+  }, [translatedKeyword, platform, filters.views, filters.period, isSearching]);
 
   const handleSearch = (keyword) => {
     if (keyword) {
       setSearchKeyword(keyword);
-      setPlatform('tiktok');
-      setLanguage('kr');
       setIsSearching(true);
     }
   };
@@ -71,7 +100,11 @@ function App() {
       <div className="main-content">
         {/* 좌측: 대시보드 필터 영역 */}
         <aside className="sidebar">
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar
+            onSearch={handleSearch}
+            translatedKeyword={translatedKeyword}
+            language={language}
+          />
 
           <PlatformSelector
             active={platform}

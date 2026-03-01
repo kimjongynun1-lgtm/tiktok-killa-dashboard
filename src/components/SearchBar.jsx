@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './components.css';
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, translatedKeyword, language }) {
     const [keyword, setKeyword] = useState('');
 
     const handleSearch = () => {
@@ -34,13 +34,13 @@ export default function SearchBar({ onSearch }) {
             <div className="translation-box">
                 <div className="trans-top">
                     <span style={{ fontSize: '14px' }}>📄</span>
-                    <span>원문 (ENGLISH)</span>
+                    <span>{language === 'kr' ? '원문 (KOREAN)' : language === 'cn' ? '번역결과 (CHINESE)' : '번역결과 (ENGLISH)'}</span>
                 </div>
                 <div className="trans-middle">
-                    {keyword ? keyword : '-'}
+                    {translatedKeyword ? translatedKeyword : (keyword ? keyword : '-')}
                 </div>
                 <div className="trans-bottom">
-                    <span>💬</span> 검색 버튼을 클릭하면 번역 후 검색됩니다
+                    <span>💬</span> 검색 언어를 변경하면 자동으로 번역됩니다
                 </div>
             </div>
         </div>

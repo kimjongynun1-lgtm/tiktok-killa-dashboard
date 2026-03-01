@@ -57,7 +57,7 @@ export default function VideoResults({ keyword, filters, videos }) {
                         </div>
                         <div className="video-info" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(transparent, rgba(0,0,0,0.8))', padding: '16px', color: 'white' }}>
                             <a
-                                href={`https://www.tiktok.com/${video.author}/video/${video.id}`}
+                                href={filters.platform === 'douyin' ? 'https://www.douyin.com/jingxuan' : `https://www.tiktok.com/${video.author}/video/${video.id}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{ color: 'white', textDecoration: 'none', display: 'block' }}

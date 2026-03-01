@@ -11,7 +11,7 @@ function App() {
   const [language, setLanguage] = useState('kr');
 
   const [filters, setFilters] = useState({
-    views: '100k-300k',
+    views: '100k+',
     period: 'all',
     duration: 'all',
     popularity: ['all']

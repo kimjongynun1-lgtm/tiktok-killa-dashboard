@@ -4,7 +4,7 @@ import './components.css';
 export default function Filters({ filters, setFilters }) {
     const viewsOptions = [
         { id: 'all', label: '전체' },
-        { id: '100k-300k', label: '10만~30만' },
+        { id: '100k+', label: '10만 이상' },
         { id: '300k-500k', label: '30만~50만' },
         { id: '500k-1m', label: '50만~100만' },
         { id: '1m+', label: '100만+' }
